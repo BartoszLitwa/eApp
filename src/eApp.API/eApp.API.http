@@ -1,0 +1,11 @@
+@eApp.API_HostAddress = http://localhost:5071
+
+GET {{eApp.API_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{eApp.API_HostAddress}}/todos/1
+Accept: application/json
+
+###
