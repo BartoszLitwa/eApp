@@ -45,7 +45,6 @@ var app = builder.Build();
 app.InitializeApiVersionSet();
 app.PrepPopulation();
 app.MapCarter();
-app.UseHttpsRedirection();
 
 app.AddSwagger();
 

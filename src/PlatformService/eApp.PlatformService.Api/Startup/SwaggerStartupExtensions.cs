@@ -17,9 +17,6 @@ public static class SwaggerStartupExtensions
     
     public static WebApplication AddSwagger(this WebApplication app)
     {
-        if (!app.Environment.IsDevelopment()) 
-            return app;
-        
         app.UseSwagger();
         app.UseSwaggerUI(options =>
         {
