@@ -14,6 +14,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eApp.PlatformService.Api", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eApp.PlatformService.Domain", "src\PlatformService\eApp.PlatformService.Domain\eApp.PlatformService.Domain.csproj", "{A9F9A23E-3DD7-4533-9A6B-C29C03F432B7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommandService", "CommandService", "{146C77C4-0DB8-4AF8-9C7E-3D74ACF0C7F3}"
+	ProjectSection(SolutionItems) = preProject
+		src\CommandService\.dockerignore = src\CommandService\.dockerignore
+		src\CommandService\Dockerfile = src\CommandService\Dockerfile
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eApp.CommandService.Api", "src\CommandService\eApp.CommandService.Api\eApp.CommandService.Api.csproj", "{3C55ECBA-63A6-4697-959D-FD68B09C17B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9B27EC3D-F782-448A-B946-8CD36FD0712F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +38,17 @@ Global
 		{A9F9A23E-3DD7-4533-9A6B-C29C03F432B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F9A23E-3DD7-4533-9A6B-C29C03F432B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9F9A23E-3DD7-4533-9A6B-C29C03F432B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C55ECBA-63A6-4697-959D-FD68B09C17B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C55ECBA-63A6-4697-959D-FD68B09C17B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C55ECBA-63A6-4697-959D-FD68B09C17B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C55ECBA-63A6-4697-959D-FD68B09C17B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A1514353-D714-4659-BC0D-5AC7289C6D37} = {372A6968-5741-420B-92D4-FC3BAA6196BB}
 		{5716A4E5-D650-46A7-8252-1649E57D96B7} = {A1514353-D714-4659-BC0D-5AC7289C6D37}
 		{A9F9A23E-3DD7-4533-9A6B-C29C03F432B7} = {A1514353-D714-4659-BC0D-5AC7289C6D37}
+		{146C77C4-0DB8-4AF8-9C7E-3D74ACF0C7F3} = {372A6968-5741-420B-92D4-FC3BAA6196BB}
+		{3C55ECBA-63A6-4697-959D-FD68B09C17B2} = {146C77C4-0DB8-4AF8-9C7E-3D74ACF0C7F3}
+		{9B27EC3D-F782-448A-B946-8CD36FD0712F} = {372A6968-5741-420B-92D4-FC3BAA6196BB}
 	EndGlobalSection
 EndGlobal

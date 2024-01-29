@@ -1,0 +1,6 @@
+@eApp.CommandService.Api_HostAddress = http://localhost:5285
+
+GET {{eApp.CommandService.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
