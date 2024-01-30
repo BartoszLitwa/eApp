@@ -1,8 +1,9 @@
-﻿using eApp.PlatformService.Api.OpenApi;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace eApp.PlatformService.Api.Startup;
+namespace eApp.Common.OpenApi;
 
 public static class SwaggerStartupExtensions
 {

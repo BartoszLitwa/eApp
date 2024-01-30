@@ -26,11 +26,17 @@
       </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1" />
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+      <PackageReference Include="Rin" Version="2.6.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Shared\eApp.Common\eApp.Common.csproj" />
       <ProjectReference Include="..\eApp.PlatformService.Domain\eApp.PlatformService.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Constants\" />
+      <Folder Include="Startup\" />
     </ItemGroup>
 
 </Project>

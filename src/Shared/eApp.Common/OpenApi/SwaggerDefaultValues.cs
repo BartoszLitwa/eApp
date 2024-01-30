@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace eApp.PlatformService.Api.OpenApi;
+namespace eApp.Common.OpenApi;
 
 public class SwaggerDefaultValues : IOperationFilter
 {
