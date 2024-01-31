@@ -2,6 +2,11 @@
 
 run in `/src/` directory
 
-`docker build -t bartoszlitwa/eapp.commandservice.api -f CommandService/Dockerfile .`
-
+# Platform Service
 `docker build -t bartoszlitwa/eapp.platformservice.api -f PlatformService\Dockerfile .`
+`docker push bartoszlitwa/eapp.platformservice.api`
+
+# Command Service
+`docker build -t bartoszlitwa/eapp.commandservice.api -f CommandService/Dockerfile .`
+`docker push bartoszlitwa/eapp.commandservice.api`
+

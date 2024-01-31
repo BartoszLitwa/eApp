@@ -38,7 +38,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mssql-clusterip-service
+  name: mssql-clusterip-srv
 spec:
   type: ClusterIP
   selector:
