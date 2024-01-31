@@ -12,13 +12,20 @@ builder.WebHost.UseKestrelHttpsConfiguration();
 
 builder.Services.Configure<AppConfig>(builder.Configuration.GetSection(AppConfig.Section));
 
-var sqlConfig = builder.Configuration.GetSection(AppConfig.Section).Get<AppConfig>()
-                ?? throw new ArgumentNullException(AppConfig.Section);
+var appConfig = builder.Configuration.GetSection(AppConfig.Section).Get<AppConfig>();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    // opt.UseSqlServer(sqlConfig!.ConnectionString);
-    opt.UseInMemoryDatabase("InMemory");
+    if (builder.Environment.IsProduction())
+    {
+        Console.WriteLine("--> Using MSSQL Server");
+        opt.UseSqlServer(appConfig.ConnectionStrings.PlatformMssql);
+    }
+    else
+    {
+        Console.WriteLine("--> Using InMemory Database");
+        opt.UseInMemoryDatabase("InMemory");
+    }
 });
 
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
@@ -37,7 +44,7 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 var app = builder.Build();
 
 app.InitializeApiVersionSet();
-app.PrepPopulation();
+app.PrepPopulation(app.Environment.IsProduction());
 app.MapCarter();
 app.AddSwagger();
 
