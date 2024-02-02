@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using CSharpFunctionalExtensions;
 using eApp.PlatformService.Api.Data;
+using eApp.PlatformService.Api.DataServices.Asynchronous;
 using eApp.PlatformService.Api.Dtos;
+using eApp.PlatformService.Api.Dtos.Platform;
 using eApp.PlatformService.Api.SyncDataServices.Http;
 using eApp.PlatformService.Domain.Dtos;
 using eApp.PlatformService.Domain.Models;
@@ -12,7 +14,7 @@ namespace eApp.PlatformService.Api.Platforms.Commands;
 public record CreatePlatformCommand(string Name, string Publisher, string Cost)
     : IRequest<Result<PlatformReadDto, ValidationFailed>>;
 
-public class CreatePlatformHandler(AppDbContext dbContext, IMapper mapper, ICommandDataClient commandDataClient)
+public class CreatePlatformHandler(AppDbContext dbContext, IMapper mapper, ICommandDataClient commandDataClient, IMessageBusClient messageBusClient)
     : IRequestHandler<CreatePlatformCommand, Result<PlatformReadDto, ValidationFailed>>
 {
     public async Task<Result<PlatformReadDto, ValidationFailed>> Handle(CreatePlatformCommand request, CancellationToken cancellationToken)
@@ -29,6 +31,7 @@ public class CreatePlatformHandler(AppDbContext dbContext, IMapper mapper, IComm
 
         var platformReadDto = mapper.Map<PlatformReadDto>(created.Entity);
 
+        // Send Synchronous Message
         try
         {
             await commandDataClient.SendPlatformToCommand(platformReadDto);
@@ -36,6 +39,19 @@ public class CreatePlatformHandler(AppDbContext dbContext, IMapper mapper, IComm
         catch (Exception e)
         {
             Console.WriteLine($"--> Could not send synchronously: {e.Message}");
+            throw;
+        }
+        
+        // Send Asynchronous Message
+        try
+        {
+            var published = mapper.Map<PlatformPublishedDto>(platformReadDto) 
+                with { Event = "Platform_Published" };
+            await messageBusClient.PublishNewPlatform(published, cancellationToken);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"--> Could not send asynchronously: {e.Message}");
             throw;
         }
 

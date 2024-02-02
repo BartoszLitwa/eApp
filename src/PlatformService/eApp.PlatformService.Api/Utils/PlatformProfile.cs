@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using eApp.PlatformService.Api.Dtos;
+using eApp.PlatformService.Api.Dtos.Platform;
 using eApp.PlatformService.Domain.Dtos;
 using eApp.PlatformService.Domain.Models;
 
@@ -11,5 +12,6 @@ public class PlatformProfile : Profile
     {
         CreateMap<Platform, PlatformReadDto>();
         CreateMap<PlatformCreateDto, Platform>();
+        CreateMap<PlatformReadDto, PlatformPublishedDto>();
     }    
 }

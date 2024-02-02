@@ -3,6 +3,7 @@ using eApp.Common.ApiVersioning;
 using eApp.Common.OpenApi;
 using eApp.PlatformService.Api;
 using eApp.PlatformService.Api.Data;
+using eApp.PlatformService.Api.DataServices.Asynchronous;
 using eApp.PlatformService.Api.SyncDataServices.Http;
 using eApp.PlatformService.Api.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,8 @@ var builder = WebApplication.CreateSlimBuilder(args);
 builder.WebHost.UseKestrelHttpsConfiguration();
 
 builder.Services.Configure<AppConfig>(builder.Configuration.GetSection(AppConfig.Section));
+builder.Services.Configure<ConnectionStringsConfig>(builder.Configuration.GetSection(ConnectionStringsConfig.Section));
+builder.Services.Configure<RabbitMqConfig>(builder.Configuration.GetSection(RabbitMqConfig.Section));
 
 var appConfig = builder.Configuration.GetSection(AppConfig.Section).Get<AppConfig>();
 
@@ -29,6 +32,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
+builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
 
 builder.Services.AddSwagger();
 builder.Services.AddServiceApiVersioning();
