@@ -1,5 +1,6 @@
 using Carter;
 using eApp.Common.ApiVersioning;
+using eApp.Common.Configs;
 using eApp.Common.OpenApi;
 using eApp.PlatformService.Api;
 using eApp.PlatformService.Api.Data;
@@ -13,16 +14,16 @@ builder.WebHost.UseKestrelHttpsConfiguration();
 
 builder.Services.Configure<AppConfig>(builder.Configuration.GetSection(AppConfig.Section));
 builder.Services.Configure<ConnectionStringsConfig>(builder.Configuration.GetSection(ConnectionStringsConfig.Section));
-builder.Services.Configure<RabbitMqConfig>(builder.Configuration.GetSection(RabbitMqConfig.Section));
+builder.Services.AddRabbitMqConfig(builder.Configuration);
 
-var appConfig = builder.Configuration.GetSection(AppConfig.Section).Get<AppConfig>();
+var connectionStrings = builder.Configuration.GetSection(ConnectionStringsConfig.Section).Get<ConnectionStringsConfig>();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     if (builder.Environment.IsProduction())
     {
         Console.WriteLine("--> Using MSSQL Server");
-        opt.UseSqlServer(appConfig.ConnectionStrings.PlatformMssql);
+        opt.UseSqlServer(connectionStrings.PlatformMssql);
     }
     else
     {

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using eApp.Common.Configs;
 using eApp.PlatformService.Api.Dtos.Platform;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
@@ -65,8 +66,14 @@ public class MessageBusClient : IMessageBusClient, IDisposable
 
     public void Dispose()
     {
-        _channel?.Dispose();
-        _connection?.Dispose();
+        if (_channel.IsOpen)
+        {
+            _channel.Close();
+            _connection.Close();
+        }
+        
+        _channel.Dispose();
+        _connection.Dispose();
     }
 
     private void RabbitMQ_ConnectionShutdown(object sender, ShutdownEventArgs e)

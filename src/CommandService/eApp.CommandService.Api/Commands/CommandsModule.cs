@@ -2,6 +2,7 @@
 using eApp.CommandService.Api.Commands.Commands;
 using eApp.CommandService.Api.Commands.Queries;
 using eApp.CommandService.Api.Dtos;
+using eApp.CommandService.Api.Dtos.Commands;
 using eApp.Common.ApiVersioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

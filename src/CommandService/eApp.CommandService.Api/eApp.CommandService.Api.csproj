@@ -16,6 +16,7 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.1" />
         <PackageReference Include="MongoDB.Driver" Version="2.23.1" />
+        <PackageReference Include="RabbitMQ.Client" Version="7.0.0-alpha.2" />
         <PackageReference Include="Rin" Version="2.6.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>

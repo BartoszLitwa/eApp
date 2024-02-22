@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CSharpFunctionalExtensions;
+using eApp.CommandService.Api.EventProcessing;
 using eApp.PlatformService.Api.Data;
 using eApp.PlatformService.Api.DataServices.Asynchronous;
 using eApp.PlatformService.Api.Dtos;
@@ -46,7 +47,7 @@ public class CreatePlatformHandler(AppDbContext dbContext, IMapper mapper, IComm
         try
         {
             var published = mapper.Map<PlatformPublishedDto>(platformReadDto) 
-                with { Event = "Platform_Published" };
+                with { Event = PlatformEventType.PlatformPublished.ToString() };
             await messageBusClient.PublishNewPlatform(published, cancellationToken);
         }
         catch (Exception e)

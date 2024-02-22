@@ -2,6 +2,7 @@
 using CSharpFunctionalExtensions;
 using eApp.CommandService.Api.Data;
 using eApp.CommandService.Api.Dtos;
+using eApp.CommandService.Api.Dtos.Commands;
 using eApp.CommandService.Domain.Models;
 using eApp.PlatformService.Domain.Models;
 using MediatR;
