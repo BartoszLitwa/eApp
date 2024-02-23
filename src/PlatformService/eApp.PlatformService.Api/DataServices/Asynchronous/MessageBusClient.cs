@@ -27,7 +27,7 @@ public class MessageBusClient : IMessageBusClient, IDisposable
             _connection = factory.CreateConnection();
             _channel = _connection.CreateChannel();
             
-            _channel.ExchangeDeclare(exchange: "trigger", type: ExchangeType.Topic);
+            _channel.ExchangeDeclare(exchange: "platform.exchange.topic", type: ExchangeType.Topic);
             
             _connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
             _logger.LogInformation("--> Connected to message bus");
@@ -57,7 +57,7 @@ public class MessageBusClient : IMessageBusClient, IDisposable
         var body = Encoding.UTF8.GetBytes(message);
         var properties = new BasicProperties();
         
-        await _channel.BasicPublishAsync(exchange: "trigger",
+        await _channel.BasicPublishAsync(exchange: "platform.exchange.topic",
             routingKey: "platform.new",
             basicProperties: properties,
             body: body,

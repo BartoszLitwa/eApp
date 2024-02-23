@@ -2,7 +2,7 @@
 using CSharpFunctionalExtensions;
 using eApp.PlatformService.Api.Data;
 using eApp.PlatformService.Api.Dtos;
-using eApp.PlatformService.Domain.Dtos;
+using eApp.PlatformService.Api.Dtos.Platform;
 using eApp.PlatformService.Domain.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

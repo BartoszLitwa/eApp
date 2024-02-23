@@ -12,12 +12,15 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<AppConfig>(builder.Configuration.GetSection(AppConfig.Section));
+builder.Services.Configure<ConnectionStringsConfig>(builder.Configuration.GetSection(ConnectionStringsConfig.Section));
 
 builder.Services.AddRabbitMqConfig(builder.Configuration);
 
+var connectionStrings = builder.Configuration.GetSection(ConnectionStringsConfig.Section).Get<ConnectionStringsConfig>();
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    opt.UseInMemoryDatabase("InMem");
+    Console.WriteLine("--> Using MSSQL Server");
+    opt.UseSqlServer(connectionStrings.CommandMssql);
 });
 
 builder.Services.AddSingleton<IEventProcessor, EventProcessor>();

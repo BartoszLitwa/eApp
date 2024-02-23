@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 using eApp.PlatformService.Api.Dtos;
+using eApp.PlatformService.Api.Dtos.Platform;
 using Microsoft.Extensions.Options;
 
 namespace eApp.PlatformService.Api.SyncDataServices.Http;

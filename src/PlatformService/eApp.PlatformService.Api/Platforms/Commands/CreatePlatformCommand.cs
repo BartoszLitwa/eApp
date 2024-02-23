@@ -6,7 +6,6 @@ using eApp.PlatformService.Api.DataServices.Asynchronous;
 using eApp.PlatformService.Api.Dtos;
 using eApp.PlatformService.Api.Dtos.Platform;
 using eApp.PlatformService.Api.SyncDataServices.Http;
-using eApp.PlatformService.Domain.Dtos;
 using eApp.PlatformService.Domain.Models;
 using MediatR;
 

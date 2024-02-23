@@ -1,8 +1,8 @@
 ﻿using Carter;
 using eApp.Common.ApiVersioning;
+using eApp.PlatformService.Api.Dtos.Platform;
 using eApp.PlatformService.Api.Platforms.Commands;
 using eApp.PlatformService.Api.Platforms.Queries;
-using eApp.PlatformService.Domain.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,3 +1,13 @@
-﻿namespace eApp.PlatformService.Api.Dtos;
+﻿using System.ComponentModel.DataAnnotations;
 
-public record PlatformReadDto(int Id, string Name, string Publisher, string Cost);
+namespace eApp.PlatformService.Api.Dtos.Platform;
+
+public record PlatformReadDto
+{
+    [Required] public int Id { get; init; }
+    [Required] public string Name { get; init; }
+
+    [Required] public string Publisher { get; init; }
+
+    [Required] public string Cost { get; init; }
+}

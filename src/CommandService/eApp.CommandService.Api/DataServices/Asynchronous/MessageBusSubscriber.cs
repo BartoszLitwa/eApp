@@ -13,7 +13,7 @@ public class MessageBusSubscriber : BackgroundService
     private readonly ILogger<MessageBusSubscriber> _logger;
     private readonly IConnection _connection;
     private readonly IChannel _channel;
-    private string _queueName;
+    private readonly string _queueName;
 
     public MessageBusSubscriber(IOptions<RabbitMqConfig> rabbitMqConfig, IEventProcessor eventProcessor, ILogger<MessageBusSubscriber> logger)
     {
@@ -23,14 +23,16 @@ public class MessageBusSubscriber : BackgroundService
         {
             HostName = rabbitMqConfig.Value.Host,
             Port = rabbitMqConfig.Value.Port,
+            DispatchConsumersAsync = true
         };
 
         _connection = factory.CreateConnection();
         _channel = _connection.CreateChannel();
         
-        _channel.ExchangeDeclare(exchange: "trigger", type: ExchangeType.Topic);
+        _channel.ExchangeDeclare(exchange: "platform.exchange.topic", type: ExchangeType.Topic);
         _queueName = _channel.QueueDeclare().QueueName;
-        _channel.QueueBind(queue: _queueName, exchange: "trigger", routingKey: "");
+        // Using wildcard for now - # = 0 or more words
+        _channel.QueueBind(queue: _queueName, exchange: "platform.exchange.topic", routingKey: "platform.*");
 
         Console.WriteLine("--> Listening on the message bus...");
         
@@ -42,7 +44,6 @@ public class MessageBusSubscriber : BackgroundService
         stoppingToken.ThrowIfCancellationRequested();
 
         var consumer = new AsyncEventingBasicConsumer(_channel);
-
         consumer.Received += async (moduleHandle, ea) =>
         {
             Console.WriteLine("--> Event received!");

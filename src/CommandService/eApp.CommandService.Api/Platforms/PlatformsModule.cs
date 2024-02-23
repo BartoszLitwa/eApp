@@ -12,7 +12,7 @@ public class PlatformsModule() : CarterModule("/api/platforms")
     {
         var group = app.MapGroup("");
 
-        group.MapGet("/", async (ISender sender) =>
+        group.MapGet("/all", async (ISender sender) =>
         {
             var result = await sender.Send(new GetPlatformsQuery());
             return result.IsFailure ? Results.BadRequest() : Results.Ok(result.Value);

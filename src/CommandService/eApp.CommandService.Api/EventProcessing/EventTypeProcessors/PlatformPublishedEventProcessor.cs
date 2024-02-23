@@ -4,6 +4,7 @@ using eApp.CommandService.Api.Data;
 using eApp.CommandService.Api.Dtos.Platforms;
 using eApp.CommandService.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace eApp.CommandService.Api.EventProcessing.EventTypeProcessors;
 
@@ -18,7 +19,7 @@ public class PlatformPublishedEventProcessor : EventProcessorBase
         
         var context = serviceProvider.GetRequiredService<AppDbContext>();
 
-        await using var transaction = await context.Database.BeginTransactionAsync(cancellationToken);
+        await using var transaction =  await context.Database.BeginTransactionAsync(cancellationToken);
         try
         {
             var platformExists = await context.Platforms.AnyAsync(e => e.ExternalId == platform.ExternalId, cancellationToken: cancellationToken);

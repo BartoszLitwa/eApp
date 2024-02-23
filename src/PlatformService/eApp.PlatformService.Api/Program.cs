@@ -20,16 +20,8 @@ var connectionStrings = builder.Configuration.GetSection(ConnectionStringsConfig
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    if (builder.Environment.IsProduction())
-    {
-        Console.WriteLine("--> Using MSSQL Server");
-        opt.UseSqlServer(connectionStrings.PlatformMssql);
-    }
-    else
-    {
-        Console.WriteLine("--> Using InMemory Database");
-        opt.UseInMemoryDatabase("InMemory");
-    }
+    Console.WriteLine("--> Using MSSQL Server");
+    opt.UseSqlServer(connectionStrings.PlatformMssql);
 });
 
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
