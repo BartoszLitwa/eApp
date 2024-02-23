@@ -38,6 +38,7 @@ builder.Services.AddCarter();
 var app = builder.Build();
 
 app.InitializeApiVersionSet();
+app.PrepPopulation(app.Environment.IsProduction());
 app.MapCarter();
 app.AddSwagger();
 

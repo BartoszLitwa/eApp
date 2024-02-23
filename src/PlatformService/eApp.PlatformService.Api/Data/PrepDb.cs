@@ -13,6 +13,7 @@ public static class PrepDb
 
     private static void SeedData(AppDbContext context, bool isProduction)
     {
+        context.Database.EnsureCreated();
         if (isProduction)
         {
             Console.WriteLine("--> Attempting to apply migrations...");
