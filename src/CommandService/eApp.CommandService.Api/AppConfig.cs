@@ -6,7 +6,8 @@ public class AppConfig
 {
     public const string Section = "AppConfig";
     
-    public RabbitMqConfig RabbitMq { get; init; }
+    public string PlatformServiceUrl { get; init; }
+    public string PlatformServiceGrpcUrl { get; init; }
 }
 
 public class ConnectionStringsConfig
@@ -14,4 +15,11 @@ public class ConnectionStringsConfig
     public const string Section = "ConnectionStrings";
     
     public string CommandMssql { get; init; }
+}
+
+public class GrpcConfg
+{
+    public const string Section = "Grpc";
+    
+    public string GetPlatformProtoPath { get; init; }
 }

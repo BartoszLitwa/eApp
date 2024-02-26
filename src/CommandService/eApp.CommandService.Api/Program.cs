@@ -2,6 +2,7 @@ using Carter;
 using eApp.CommandService.Api;
 using eApp.CommandService.Api.Data;
 using eApp.CommandService.Api.DataServices.Asynchronous;
+using eApp.CommandService.Api.DataServices.Synchronous.Grpc;
 using eApp.CommandService.Api.EventProcessing;
 using eApp.CommandService.Api.Utils;
 using eApp.Common.ApiVersioning;
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<AppConfig>(builder.Configuration.GetSection(AppConfig.Section));
 builder.Services.Configure<ConnectionStringsConfig>(builder.Configuration.GetSection(ConnectionStringsConfig.Section));
+builder.Services.Configure<GrpcConfg>(builder.Configuration.GetSection(GrpcConfg.Section));
 
 builder.Services.AddRabbitMqConfig(builder.Configuration);
 
@@ -24,6 +26,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 
 builder.Services.AddSingleton<IEventProcessor, EventProcessor>();
+builder.Services.AddScoped<IPlatformDataClient, PlatformDataClient>();
 
 builder.Services.AddHostedService<MessageBusSubscriber>();
 

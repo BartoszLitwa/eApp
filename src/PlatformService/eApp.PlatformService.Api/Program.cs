@@ -5,6 +5,7 @@ using eApp.Common.OpenApi;
 using eApp.PlatformService.Api;
 using eApp.PlatformService.Api.Data;
 using eApp.PlatformService.Api.DataServices.Asynchronous;
+using eApp.PlatformService.Api.DataServices.Synchronous.Grpc;
 using eApp.PlatformService.Api.SyncDataServices.Http;
 using eApp.PlatformService.Api.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -26,12 +27,13 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
+builder.Services.AddGrpc();
 
-builder.Services.AddSwagger();
 builder.Services.AddServiceApiVersioning();
 builder.Services.AddAutoMapper(typeof(PlatformProfile).Assembly);
 builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
 builder.Services.AddCarter();
+builder.Services.AddSwagger();
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
@@ -40,9 +42,12 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 
 var app = builder.Build();
 
+app.MapGrpcService<GrpcPlatformService>();
+
 app.InitializeApiVersionSet();
 app.PrepPopulation(app.Environment.IsProduction());
 app.MapCarter();
 app.AddSwagger();
+
 
 app.Run();
