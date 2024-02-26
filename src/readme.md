@@ -11,9 +11,11 @@
 `docker push bartoszlitwa/eapp.commandservice.api`
 
 # Hosts Mapping
-C:\Windows\System32\drivers\etc\hosts
+`C:\Windows\System32\drivers\etc\hosts`
 Map to custom domain locally
 127.0.0.1 eapp.com
+
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/aws/deploy.yaml`
 
 # Kubectl
 `kubectl get deployment`
@@ -40,3 +42,7 @@ Map to custom domain locally
 `kubectl get secret`
 
 `kubectl delete secret {secret-name}`
+
+`kubectl get namespace`
+
+`kubectl get pods --namespace=ingress-nginx`
